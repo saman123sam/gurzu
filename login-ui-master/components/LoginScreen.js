@@ -1,46 +1,42 @@
-import  React from 'react'
+import React, { useContext, useState, useRef } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
 
-export default class LoginScreen extends React.Component {
+import { UserDispatch } from '../reducer/userReducer';
 
-    constructor(props){
-        super(props)
-        this.validateInput = React.createRef()
-    }
+const LoginScreen = () => {
+    const validateInput = useRef();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [errMsg, setErrMsg] = useState("");
 
-    state = {
-        username: "",
-        password: "",
-        errMsg: ""
-    }
+    const dispatch = useContext(UserDispatch)
 
-    onLogin = () => {
-        if(this.state.username == 'saman' && this.state.password == '12345'){
-            this.props.navigation.navigate('Main')
+    const onLogin = () => {
+        if(username == 'saman' && password == '12345'){
+            dispatch({type: "loggedSuccess"})
         }else{
-            this.validateInput.current.shake(800)
-            this.setState({errMsg: 'Invalid login details. Try again!'})
+            validateInput.current.shake(800)
+            setErrMsg('Invalid login details. Try again!')
         }
     }
-
-    render(){
-        return(
+        
+    return(
             <View style={ styles.container}>
                 <Text style={{ fontSize: 25, marginTop: 20 }}>Welcome Back! </Text>
                 <Text style={{ fontSize: 16, color: 'gray', marginTop: 20 }}>Sign in to continue</Text>
 
                 <Animatable.View
-                    ref={this.validateInput}
+                    ref={validateInput}
                 >
                 <TextInput
                     style={{ marginTop: 40, borderBottomColor: '#ddd', borderBottomWidth: 1, paddingBottom: 20 }}
                     placeholder="Username"
                     onChangeText = {(text) => 
                         {
-                            this.setState({errMsg: ''}),
-                            this.setState({ username: text })
+                            setErrMsg('')
+                            setUsername(text)
                         }
                     }
                 />
@@ -49,14 +45,14 @@ export default class LoginScreen extends React.Component {
                     style={{ marginTop: 40, borderBottomColor: '#ddd', borderBottomWidth: 1, paddingBottom: 20 }}
                     placeholder="Password"
                     secureTextEntry={true}
-                    onChangeText = {(text) => 
+                    onChangeText={(text) => 
                         {
-                            this.setState({errMsg: ''}),
-                            this.setState({ password: text })}
+                            setErrMsg('');
+                            setPassword(text);
                         }
-
+                    }
                 />
-                <Text style={{ color: 'red', textAlign: 'center', marginTop: 10 }}>{this.state.errMsg}</Text>
+                <Text style={{ color: 'red', textAlign: 'center', marginTop: 10 }}>{errMsg}</Text>
                 
                 </Animatable.View>
 
@@ -64,7 +60,7 @@ export default class LoginScreen extends React.Component {
 
                 <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
                     <TouchableOpacity
-                        onPress={() => this.onLogin()}
+                        onPress={onLogin}
                         style={{ width: 200, backgroundColor: '#0d47a1', padding: 10, alignItems: 'center', justifyContent: 'center', borderRadius: 40, marginTop: 30 }}
                     >
                         <Text style={{ textAlign: 'center', color: '#FFF', fontSize: 16 }}>Login Now</Text>
@@ -92,8 +88,9 @@ export default class LoginScreen extends React.Component {
             
             </View>
         )
-    }
 }
+
+export default LoginScreen;
 
 const styles = StyleSheet.create({
     container: {
