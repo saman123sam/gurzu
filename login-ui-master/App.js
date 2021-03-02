@@ -23,6 +23,7 @@ export default class App extends React.Component{
   render(){
     return(
       <View style= {styles.container}>
+        <NavigationContainer>
          <Tab.Navigator
             initialRouteName="Feed"
             activeColor="#e91e63"
@@ -60,6 +61,7 @@ export default class App extends React.Component{
             }}
           />
           </Tab.Navigator>
+          </NavigationContainer>
           <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="Home" component={HomeScreen} />
