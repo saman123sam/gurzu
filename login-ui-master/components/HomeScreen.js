@@ -14,7 +14,7 @@ export default class HomeScreen extends React.Component {
             <View style={styles.container}>
         <Image
           style={{ width:"80%", height: 300 }}
-          source={require('/home/saman/Downloads/login-ui-master/assets/images/gurzu.png')}
+          source={require('../assets/images/gurzu.png')}
           resizeMode="contain"
         />
 
