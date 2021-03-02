@@ -13,7 +13,7 @@ export default function App() {
 
                 <View style={{ alignSelf: "center" }}>
                     <View style={styles.profileImage}>
-                        <Image source={require("/home/saman/Downloads/login-ui-master/assets/images/tempAvatar.jpg")} style={styles.image} resizeMode="center"></Image>
+                        <Image source={require("../assets/profile-pic.jpg")} style={styles.image} resizeMode="center"></Image>
                     </View>
                     <View style={styles.dm}>
                         <MaterialIcons name="chat" size={18} color="#DFD8C8"></MaterialIcons>
@@ -47,13 +47,13 @@ export default function App() {
                 <View style={{ marginTop: 32 }}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <View style={styles.mediaImageContainer}>
-                            <Image source={require("/home/saman/Downloads/login-ui-master/assets/images/tempImage2.jpg")} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={require("../assets/images/Image2.jpg")} style={styles.image} resizeMode="cover"></Image>
                         </View>
                         <View style={styles.mediaImageContainer}>
-                            <Image source={require("/home/saman/Downloads/login-ui-master/assets/media2.jpg")} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={require("../assets/media2.jpg")} style={styles.image} resizeMode="cover"></Image>
                         </View>
                         <View style={styles.mediaImageContainer}>
-                            <Image source={require("/home/saman/Downloads/login-ui-master/assets/media3.jpg")} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={require("../assets/media3.jpg")} style={styles.image} resizeMode="cover"></Image>
                         </View>
                     </ScrollView>
                     <View style={styles.mediaCount}>

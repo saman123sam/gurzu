@@ -16,7 +16,7 @@ export default class PostScreen extends React.Component {
                 </View>
 
                 <View style={styles.inputContainer}>
-                    <Image source={require("/home/saman/Downloads/login-ui-master/assets/images/tempAvatar.jpg")} style={styles.avatar}></Image>
+                    <Image source={require("../assets/images/Avatar1.jpg")} style={styles.avatar}></Image>
                     <TextInput
                         autoFocus={true}
                         multiline={true}
