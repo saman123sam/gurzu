@@ -1,9 +1,11 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer, useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import HomeScreen from "./components/HomeScreen";
 import LoginScreen from "./components/LoginScreen";
 import Signup from "./components/Signup";
@@ -14,7 +16,12 @@ import NotificationScreen from "./components/NotificationScreen";
 import ProfileSceen from "./components/ProfileSceen";
 import PostScreen from "./components/PostScreen";
 
-import { UserDispatch, initialState, userReducer } from "./reducer/userReducer";
+import {
+  UserDispatch,
+  initialState,
+  userReducer,
+  initializer,
+} from "./reducer/userReducer";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -86,7 +93,19 @@ const AppNavigator = () => {
 };
 
 const App = () => {
-  const [state, dispatch] = useReducer(userReducer, initialState);
+  const [state, dispatch] = useReducer(userReducer, initialState, initializer);
+
+  useEffect(() => {
+    async function setUser() {
+      try {
+        await AsyncStorage.setItem("user", JSON.stringify(state));
+      } catch (e) {
+        throw e;
+      }
+    }
+
+    setUser();
+  }, [state]);
 
   return (
     <UserDispatch.Provider value={{ userState: state, dispatch }}>

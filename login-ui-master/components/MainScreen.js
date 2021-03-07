@@ -25,12 +25,12 @@ const MainScreen = () => {
   useEffect(() => {
     async function fetchFeed() {
       try {
-        const response = await axios({
+        const { data } = await axios({
           method: "get",
           url: "http://cca94326f6ae.ngrok.io/posts",
           headers: { Authorization: userToken },
         });
-        console.warn(response);
+        setFeeds(data);
       } catch (e) {
         Alert.alert("Something went wrong", "Please try again later.");
       }
